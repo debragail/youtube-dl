@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 
 import base64
 import json
-import random
 import re
 
 from .common import InfoExtractor
@@ -22,6 +21,7 @@ from ..utils import (
     long_to_bytes,
     pkcs1pad,
 )
+import secrets
 
 
 class DaisukiMottoIE(InfoExtractor):
@@ -66,7 +66,7 @@ class DaisukiMottoIE(InfoExtractor):
 
         # Some AES keys are rejected. Try it with different AES keys
         for idx in range(5):
-            aes_key = [random.randint(0, 254) for _ in range(32)]
+            aes_key = [secrets.SystemRandom().randint(0, 254) for _ in range(32)]
             padded_aeskey = intlist_to_bytes(pkcs1pad(aes_key, 128))
 
             n, e = self._RSA_KEY
