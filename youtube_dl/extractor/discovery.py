@@ -1,6 +1,4 @@
 from __future__ import unicode_literals
-
-import random
 import re
 import string
 
@@ -11,6 +9,7 @@ from ..utils import (
     try_get,
 )
 from ..compat import compat_HTTPError
+import secrets
 
 
 class DiscoveryIE(DiscoveryGoBaseIE):
@@ -61,7 +60,7 @@ class DiscoveryIE(DiscoveryGoBaseIE):
                 'client_id': try_get(
                     react_data, lambda x: x['application']['apiClientId'],
                     compat_str) or '3020a40c2356a645b4b4',
-                'nonce': ''.join([random.choice(string.ascii_letters) for _ in range(32)]),
+                'nonce': ''.join([secrets.choice(string.ascii_letters) for _ in range(32)]),
                 'redirectUri': 'https://fusion.ddmcdn.com/app/mercury-sdk/180/redirectHandler.html?https://www.%s.com' % site,
             })['access_token']
 

@@ -5,7 +5,6 @@ import re
 import time
 import hashlib
 import json
-import random
 
 from .adobepass import AdobePassIE
 from .youtube import YoutubeIE
@@ -21,6 +20,7 @@ from ..utils import (
     str_or_none,
     try_get,
 )
+import secrets
 
 
 class ViceIE(AdobePassIE):
@@ -153,7 +153,7 @@ class ViceIE(AdobePassIE):
             '_ad_unit': '',
             '_debug': '',
             'platform': 'desktop',
-            'rn': random.randint(10000, 100000),
+            'rn': secrets.SystemRandom().randint(10000, 100000),
             'fbprebidtoken': '',
         })
 
